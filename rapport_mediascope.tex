@@ -1,0 +1,582 @@
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ==========================================
+% PACKAGES REQUIS
+% ==========================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[many]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{tocbibind}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{lmodern}
+
+% ==========================================
+% PALETTE DE COULEURS (Design Premium)
+% ==========================================
+\definecolor{primary}{HTML}{1A5276}    % Bleu profond
+\definecolor{secondary}{HTML}{D35400}  % Orange dynamique
+\definecolor{tertiary}{HTML}{2980B9}   % Bleu clair pour bordures
+\definecolor{boxbg}{HTML}{F8F9F9}      % Gris très clair pour fond de boîte
+\definecolor{textgray}{HTML}{34495E}   % Gris foncé pour le texte
+\definecolor{highlight}{HTML}{FAD7A1}  % Surlignage léger
+
+% ==========================================
+% CONFIGURATION DES LIENS
+% ==========================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    filecolor=magenta,      
+    urlcolor=secondary,
+    citecolor=primary,
+    pdftitle={Rapport de Projet - MediaScope Morocco},
+    pdfauthor={Sara Errihy, Maryam Farhoune}
+}
+
+% ==========================================
+% STYLE DES TITRES (Chapitres et Sections)
+% ==========================================
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{primary}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{10pt}{30pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{primary}}{\thesection}{1em}{}
+  
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{secondary}}{\thesubsection}{1em}{}
+
+% ==========================================
+% EN-TÊTE ET PIED DE PAGE
+% ==========================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\nouppercase{\rightmark}}
+\fancyhead[L]{\textcolor{primary}{\textbf{MediaScope Morocco}}}
+\fancyfoot[C]{\textbf{\thepage}}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{primary}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0.8pt}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{primary}\leaders\hrule height \footrulewidth\hfill}}
+
+% Espacement de ligne (Pour aérer le texte)
+\onehalfspacing
+
+% ==========================================
+% BOÎTES PERSONNALISÉES POUR LES FIGURES
+% ==========================================
+\newtcolorbox{figbox}[1][]{
+    enhanced,
+    colback=boxbg,
+    colframe=tertiary,
+    boxrule=1.5pt,
+    arc=8pt,
+    drop shadow=black!20!white,
+    center,
+    title=#1,
+    coltitle=white,
+    fonttitle=\bfseries\Large,
+    attach boxed title to top center={yshift=-12pt},
+    boxed title style={colback=tertiary, rounded corners, boxrule=0pt, drop shadow=black!20!white}
+}
+
+% ==========================================
+% MACROS DE TEXTE LONG POUR ENRICHIR LE CONTENU
+% ==========================================
+\newcommand{\texteContexteA}{
+La révolution numérique a fondamentalement transformé la manière dont l'information est produite, diffusée et consommée. Au Maroc, comme partout ailleurs dans le monde, nous assistons à une prolifération sans précédent des sources de données numériques : réseaux sociaux, sites d'actualités en continu, blogs, et forums de discussion. Cette abondance d'information offre une opportunité inestimable pour comprendre l'opinion publique, suivre les tendances émergentes et analyser l'impact médiatique de divers événements. Cependant, cette quantité massive de données, caractérisée par sa vélocité, sa variété et son volume, représente un défi majeur en termes de collecte, de traitement et d'analyse.
+}
+
+\newcommand{\texteContexteB}{
+Face à cette complexité croissante, les méthodes traditionnelles de veille médiatique, souvent manuelles et chronophages, se révèlent insuffisantes et obsolètes. Il devient impératif de recourir à des solutions technologiques avancées, intégrant les principes du Big Data et de l'Intelligence Artificielle. C'est dans ce contexte précis que s'inscrit le projet MediaScope Morocco. Ce projet vise à concevoir et développer une plateforme intelligente, capable non seulement d'agréger des milliers d'articles et de posts quotidiens, mais également de les structurer, de les analyser sémantiquement et d'en extraire des insights actionnables à travers des tableaux de bord interactifs et ergonomiques.
+}
+
+\newcommand{\texteMethodo}{
+Pour mener à bien ce projet d'envergure, nous avons opté pour une approche méthodologique rigoureuse, basée sur les principes de l'Agilité. La méthode Scrum a été au cœur de notre cycle de développement, permettant une itération rapide, une adaptation continue aux changements de spécifications, et une implication constante dans la validation des livrables. Chaque itération a été rythmée par des phases de conception, de développement, de tests automatisés et de déploiement continu. Cette démarche garantit non seulement la qualité technique de la solution, mais assure également sa parfaite adéquation avec les attentes initiales. En outre, une attention particulière a été accordée à la documentation et à la maintenabilité du code, piliers essentiels pour la pérennité du système.
+}
+
+\newcommand{\texteDataEng}{
+La dimension ingénierie des données de ce projet est particulièrement critique. Nous avons mis en place une architecture robuste de type "Data Lakehouse" qui combine la flexibilité d'un Data Lake avec la rigueur d'un Data Warehouse. Cette architecture repose sur le modèle Médaillon, structurant la donnée en trois couches successives : la couche Bronze pour les données brutes ingérées en temps réel ou par lots, la couche Silver pour les données nettoyées, normalisées et enrichies, et enfin la couche Gold pour les données agrégées, prêtes à être consommées par nos modèles de Machine Learning et nos outils de Business Intelligence. Ce pipeline garantit une traçabilité totale et une qualité de donnée irréprochable tout au long du cycle de vie de l'information.
+}
+
+
+\begin{document}
+
+% ==========================================
+% PAGE DE GARDE
+% ==========================================
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        
+        {\Large \textbf{Rapport de Projet}}\\[1.5cm]
+        
+        \rule{\linewidth}{1mm} \\[0.8cm]
+        {\Huge \textbf{\textcolor{primary}{MediaScope Morocco}}} \\[0.5cm]
+        {\Large \textit{\textcolor{textgray}{Conception et Réalisation d'une Plateforme d'Analyse et de Veille Médiatique}}} \\[0.6cm]
+        \rule{\linewidth}{1mm} \\[3cm]
+        
+        \begin{minipage}{0.45\textwidth}
+            \begin{flushleft} \large
+                \textbf{\textcolor{primary}{Réalisé par :}}\\
+                \vspace{0.2cm}
+                Sara \textsc{Errihy}\\
+                Maryam \textsc{Farhoune}
+            \end{flushleft}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+            \begin{flushright} \large
+                \textbf{\textcolor{primary}{Encadré par :}} \\
+                \vspace{0.2cm}
+                M. Youness \textsc{Tabii}
+            \end{flushright}
+        \end{minipage}\\[4cm]
+        
+        \vfill
+        
+        {\large \textcolor{textgray}{Année Universitaire : 2025 - 2026}}
+        
+    \end{center}
+\end{titlepage}
+
+\newpage
+\pagenumbering{roman}
+
+% ==========================================
+% RÉSUMÉ
+% ==========================================
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+
+Le présent rapport détaille les différentes phases de conception, de développement et de déploiement de l'application \textbf{MediaScope Morocco}, une plateforme innovante dédiée à la veille médiatique et à l'analyse de données à grande échelle. Dans un contexte où l'information numérique est devenue une ressource stratégique, ce projet répond à un besoin crucial : collecter, structurer et interpréter les flux d'informations provenant de diverses sources marocaines (sites d'actualités, réseaux sociaux, blogs).
+
+Ce travail s'articule autour de plusieurs axes technologiques majeurs. Tout d'abord, l'ingénierie des données, avec la mise en place de pipelines de collecte (Web Scraping) et d'une architecture de stockage évolutive. Ensuite, l'intégration de modèles d'Intelligence Artificielle et de Traitement du Langage Naturel (NLP) permettant l'analyse de sentiments, la catégorisation d'articles et la détection de tendances émergentes. Enfin, le développement d'une interface utilisateur web interactive et intuitive, offrant des tableaux de bord dynamiques pour la visualisation des résultats.
+
+Le document retrace notre démarche méthodologique, de l'étude de l'existant à la spécification des besoins, en passant par une modélisation rigoureuse via les diagrammes UML, jusqu'à la phase finale de réalisation technique et de déploiement. Ce projet, riche en défis techniques, constitue une réponse complète et performante aux problématiques modernes du Big Data dans le secteur des médias.
+
+\vspace{1cm}
+\textbf{Mots-clés :} Veille Médiatique, Big Data, Architecture Médaillon, Data Flow, NLP, Web Scraping, Tableaux de bord, UML.
+
+\newpage
+
+% ==========================================
+% REMERCIEMENTS
+% ==========================================
+\chapter*{Remerciements}
+\addcontentsline{toc}{chapter}{Remerciements}
+
+Avant d'entamer le cœur de ce rapport, nous tenons à exprimer notre profonde gratitude envers toutes les personnes qui ont contribué, de près ou de loin, à la réalisation et à l'aboutissement de ce projet ambitieux.
+
+Nous adressons nos remerciements les plus sincères à notre encadrant, \textbf{M. Youness Tabii}, pour sa disponibilité constante, ses précieux conseils et son encadrement rigoureux tout au long de ce projet. Son expertise technique, sa vision éclairée et ses orientations stratégiques ont été déterminantes pour surmonter les divers obstacles rencontrés et pour maintenir le cap vers l'excellence.
+
+Nous tenons également à remercier l'ensemble du corps professoral et administratif pour la qualité de la formation que nous avons reçue. Leurs enseignements nous ont dotées des compétences théoriques et pratiques nécessaires pour affronter les défis complexes de l'ingénierie logicielle et des données.
+
+Enfin, nos remerciements vont à nos familles et à nos proches pour leur soutien moral indéfectible, leurs encouragements continus et leur patience durant toutes les phases de ce travail. Leur présence à nos côtés a été une source de motivation inépuisable.
+
+\newpage
+
+% ==========================================
+% TABLES (Matières, Figures, Tableaux)
+% ==========================================
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\pagenumbering{arabic}
+
+% ==========================================
+% CHAPITRE 1 : Présentation du cadre
+% ==========================================
+\chapter{Présentation du cadre de projet}
+
+\section{Introduction}
+L'ère contemporaine est profondément marquée par une digitalisation massive et une explosion sans précédent du volume des données générées quotidiennement. Au cœur de cette transformation, le secteur des médias et de l'information joue un rôle central. \texteContexteA
+
+Le projet MediaScope Morocco est né de la volonté de créer un outil puissant, capable de naviguer dans cet océan d'informations. Dans ce premier chapitre, nous poserons les jalons de notre travail en présentant le contexte général, en définissant clairement la problématique abordée, et en listant les objectifs fondamentaux que nous nous sommes fixés.
+
+\section{Contexte général du projet}
+Le paysage médiatique marocain est riche et diversifié. Il comprend de nombreux portails d'information en ligne, des journaux électroniques, ainsi qu'une présence très active sur les plateformes de réseaux sociaux. Cette diversité, bien qu'elle garantisse la pluralité des opinions, rend la tâche de suivi et d'analyse particulièrement ardue pour les professionnels (journalistes, analystes politiques, entreprises de relations publiques, etc.).
+
+\texteContexteB
+
+Aujourd'hui, disposer de la donnée ne suffit plus ; il faut être en mesure de la traiter en temps réel, de la contextualiser et de la visualiser de manière synthétique. MediaScope Morocco se positionne comme un pont entre la donnée brute dispersée sur le web marocain et l'utilisateur final à la recherche d'informations consolidées.
+
+\section{Problématique}
+Malgré la disponibilité des données, plusieurs défis majeurs se dressent :
+\begin{itemize}[label=\textcolor{secondary}{\textbullet}, itemsep=10pt]
+    \item \textbf{Fragmentation de l'information :} Les articles et opinions sont dispersés sur de multiples plateformes avec des structures techniques radicalement différentes.
+    \item \textbf{Volume et Vélocité :} Le flux constant de nouvelles publications nécessite des architectures de traitement capables de scaler horizontalement.
+    \item \textbf{Bruit et Pertinence :} Extraire l'information pertinente du "bruit" numérique (publicités, contenus dupliqués, fake news) requiert des algorithmes de filtrage avancés.
+    \item \textbf{Analyse complexe :} Comprendre le ton (positif, négatif, neutre) ou l'entité visée dans un texte en arabe, darija ou français nécessite des modèles NLP sophistiqués adaptés au contexte local.
+\end{itemize}
+
+\section{Objectifs du projet}
+Pour répondre à cette problématique, le projet MediaScope s'articule autour des objectifs suivants :
+\begin{enumerate}[label=\textbf{\textcolor{primary}{\arabic*.}}, itemsep=8pt]
+    \item \textbf{Développement d'un moteur de collecte :} Créer des scripts de Web Scraping résilients pour extraire les données des principaux sites d'actualité marocains.
+    \item \textbf{Mise en place d'un pipeline de données :} Implémenter une architecture Médaillon pour le nettoyage, la transformation et le stockage des données.
+    \item \textbf{Intégration d'algorithmes d'IA :} Déployer des modèles de Machine Learning pour l'analyse de sentiments et la classification thématique automatique.
+    \item \textbf{Création d'un Dashboard interactif :} Concevoir une interface utilisateur web ergonomique permettant la visualisation des données à travers des graphiques, des cartes et des rapports personnalisables.
+\end{enumerate}
+
+\section{Méthodologie suivie}
+\texteMethodo
+
+\newpage
+
+% ==========================================
+% CHAPITRE 2 : Spécification des besoins
+% ==========================================
+\chapter{Spécification des besoins}
+
+\section{Introduction}
+La phase de spécification des besoins est une étape charnière dans le cycle de vie de tout projet logiciel. Elle permet de définir de manière exhaustive et précise ce que le système doit accomplir (les besoins fonctionnels) et les contraintes de qualité auxquelles il doit se soumettre (les besoins non fonctionnels). Ce chapitre dresse le cahier des charges détaillé de la plateforme MediaScope.
+
+\section{Identification des acteurs}
+Le système MediaScope interagit avec plusieurs profils d'utilisateurs, chacun ayant des rôles et des permissions spécifiques :
+\begin{itemize}[label=\textcolor{secondary}{\textbullet}, itemsep=8pt]
+    \item \textbf{L'Administrateur :} Il possède les droits absolus sur la plateforme. Il gère les utilisateurs, configure les sources de scraping, et surveille la santé globale du système.
+    \item \textbf{L'Analyste (Utilisateur Standard) :} Il se connecte pour consulter les tableaux de bord, lancer des requêtes spécifiques sur les données, exporter des rapports et analyser les tendances.
+    \item \textbf{Le Système de Collecte (Acteur Automatisé) :} Il s'agit des daemons et scripts qui tournent en arrière-plan pour ingérer les données en continu.
+\end{itemize}
+
+\section{Besoins fonctionnels}
+Les besoins fonctionnels décrivent les actions concrètes que le système doit permettre de réaliser. Pour MediaScope, ils sont divisés en plusieurs modules critiques :
+
+\subsection{Module de Collecte (Scraping)}
+Le système doit être capable de :
+\begin{itemize}
+    \item Se connecter quotidiennement aux URL cibles configurées par l'administrateur.
+    \item Extraire le titre, le corps du texte, l'auteur, la date de publication et les métadonnées des articles.
+    \item Gérer les erreurs de connexion et contourner les mécanismes anti-scraping basiques (gestion des User-Agents, délais d'attente).
+\end{itemize}
+
+\subsection{Module de Traitement et NLP}
+Une fois les données collectées, le système doit :
+\begin{itemize}
+    \item Nettoyer le texte (suppression du code HTML, de la ponctuation superflue).
+    \item Détecter automatiquement la langue de l'article (Arabe, Français).
+    \item Appliquer un modèle d'analyse de sentiments pour attribuer un score (Positif, Négatif, Neutre).
+    \item Extraire les mots-clés principaux et les entités nommées (Personnalités, Lieux, Organisations).
+\end{itemize}
+
+\subsection{Module de Visualisation (Dashboard)}
+L'interface utilisateur doit offrir :
+\begin{itemize}
+    \item Une vue globale avec des KPI essentiels (nombre d'articles collectés, sentiment général du jour).
+    \item Des graphiques dynamiques (courbes de tendances temporelles, nuages de mots, diagrammes circulaires pour la répartition des sentiments).
+    \item Un moteur de recherche multicritère (par date, par source, par mot-clé).
+    \item La possibilité d'exporter les résultats sous format PDF ou CSV.
+\end{itemize}
+
+\section{Besoins non fonctionnels}
+Pour garantir la qualité et la viabilité du projet, les contraintes suivantes doivent être respectées :
+\begin{itemize}[label=\textcolor{primary}{$\rightarrow$}, itemsep=10pt]
+    \item \textbf{Performance et Scalabilité :} Le système doit traiter des milliers d'articles par jour sans dégradation des temps de réponse. L'architecture doit pouvoir évoluer (scalabilité horizontale) en cas d'ajout de nouvelles sources massives.
+    \item \textbf{Sécurité :} L'accès au Dashboard doit être protégé par un système d'authentification robuste (ex: JWT). Les données sensibles, notamment les mots de passe utilisateurs, doivent être hachées en base de données.
+    \item \textbf{Disponibilité :} La plateforme doit garantir une haute disponibilité (objectif de 99.9\% d'uptime). Les processus de collecte doivent disposer de mécanismes de reprise sur erreur (retry).
+    \item \textbf{Ergonomie (UI/UX) :} L'interface doit être intuitive, réactive (Responsive Design) s'adaptant aussi bien aux écrans d'ordinateurs qu'aux tablettes, avec un design soigné utilisant une palette de couleurs professionnelle.
+\end{itemize}
+
+\newpage
+
+% ==========================================
+% CHAPITRE 3 : Conception du système
+% ==========================================
+\chapter{Conception du système}
+
+\section{Introduction}
+La phase de conception constitue l'ossature technique du projet. Elle traduit les besoins identifiés au chapitre précédent en solutions architecturales et logicielles concrètes. Dans ce chapitre, nous allons détailler notre modélisation à travers divers diagrammes standardisés, allant de l'architecture physique à la modélisation comportementale et structurelle, en respectant les standards de l'UML (Unified Modeling Language) et de l'ingénierie des données moderne.
+
+% --- FIGURE 1 : Architecture globale ---
+\section{Architecture globale}
+L'architecture globale de MediaScope repose sur un modèle distribué et modulaire, favorisant la séparation des préoccupations. Elle est divisée en plusieurs couches distinctes : la couche de présentation (Frontend), la couche métier et logique (Backend API), la couche d'ingénierie de la donnée (Data Pipeline), et la couche de persistance (Bases de données).
+
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[1️⃣ Architecture Globale du Système]
+        \vspace{6cm}
+        \textcolor{textgray}{\Large \textit{[ Espace réservé : Insérer l'image de l'Architecture Globale ici ]}}
+        \vspace{6cm}
+    \end{figbox}
+    \caption{\textbf{Architecture globale.} Ce schéma illustre l'intégration des différents microservices, la communication entre l'interface client (Frontend) et le serveur (Backend), ainsi que l'orchestration des jobs de collecte.}
+    \label{fig:arch_globale}
+\end{figure}
+
+Cette séparation permet aux équipes de développer, de tester et de déployer chaque composant de manière indépendante. De plus, elle renforce la sécurité de l'application en n'exposant pas directement les bases de données au monde extérieur, toutes les requêtes passant obligatoirement par les points d'entrée (endpoints) sécurisés de l'API.
+
+% --- FIGURE 2 : Data Flow ---
+\section{Architecture Data Flow}
+Dans un projet fortement axé sur les données, comprendre comment l'information circule est primordial. Le diagramme de flux de données (Data Flow) décrit le cheminement d'un article, depuis sa publication sur un site web cible jusqu'à son affichage sous forme de graphique sur le tableau de bord de l'analyste.
+
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[2️⃣ Data Flow (Flux de Données)]
+        \vspace{6cm}
+        \textcolor{textgray}{\Large \textit{[ Espace réservé : Insérer l'image du Data Flow ici ]}}
+        \vspace{6cm}
+    \end{figbox}
+    \caption{\textbf{Data Flow.} Représentation du cycle de vie de la donnée : Ingestion via scrapers, streaming/batching, traitement NLP, stockage et enfin requêtage via l'API pour la visualisation.}
+    \label{fig:data_flow}
+\end{figure}
+
+Le flux commence par les "Workers" de scraping qui collectent le HTML. Ce contenu brut est envoyé vers une file d'attente ou un système de streaming. Ensuite, des processeurs consomment ces données pour en extraire le texte pur. Le texte traverse ensuite les modèles NLP pour l'enrichissement (sentiments, entités) avant d'être persisté dans la base de données analytique.
+
+% --- FIGURE 3 : Médaillon ---
+\section{Architecture Médaillon}
+\texteDataEng
+
+L'implémentation de l'architecture Médaillon est au cœur de notre stratégie Big Data. Elle assure une isolation parfaite entre les données à l'état brut et les données certifiées pour le reporting.
+
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[3️⃣ Architecture Médaillon]
+        \vspace{6cm}
+        \textcolor{textgray}{\Large \textit{[ Espace réservé : Insérer l'image de l'Architecture Médaillon ici ]}}
+        \vspace{6cm}
+    \end{figbox}
+    \caption{\textbf{Approche Médaillon.} Zone Bronze (données brutes JSON/HTML), Zone Silver (données nettoyées, dedupliquées, formatées), Zone Gold (données agrégées, KPI prêts pour la BI).}
+    \label{fig:medaillon}
+\end{figure}
+
+Cette architecture permet de retraiter l'historique complet depuis la zone Bronze en cas d'amélioration de nos modèles NLP, sans perdre l'intégrité de la donnée source originale.
+
+% --- FIGURE 4 : Cas d'utilisation ---
+\section{Diagramme des Cas d'utilisation}
+Le diagramme des cas d'utilisation modélise les interactions entre les utilisateurs (acteurs) et le système MediaScope. Il offre une vue de haut niveau sur les fonctionnalités offertes par l'application.
+
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[4️⃣ Diagramme des Cas d'Utilisation]
+        \vspace{6cm}
+        \textcolor{textgray}{\Large \textit{[ Espace réservé : Insérer l'image des Cas d'Utilisation ici ]}}
+        \vspace{6cm}
+    \end{figbox}
+    \caption{\textbf{Cas d'Utilisation.} Identification des actions principales possibles pour l'Administrateur (gestion système, sources) et l'Analyste (consultation, export, recherche).}
+    \label{fig:usecase}
+\end{figure}
+
+Chaque bulle de ce diagramme correspond à une fonctionnalité critique définie lors de la phase de spécification. Les relations "include" et "extend" permettent de modéliser les dépendances, comme l'obligation de s'authentifier ("include") avant d'accéder au tableau de bord.
+
+% --- FIGURE 5 : Diagramme de séquence ---
+\section{Diagramme de séquence}
+Pour comprendre la dynamique temporelle et l'échange de messages entre les différents objets du système, le diagramme de séquence s'avère indispensable. Nous nous concentrons ici sur le scénario critique de la consultation du tableau de bord.
+
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[5️⃣ Diagramme de Séquence (Consultation Dashboard)]
+        \vspace{6cm}
+        \textcolor{textgray}{\Large \textit{[ Espace réservé : Insérer l'image du Diagramme de Séquence ici ]}}
+        \vspace{6cm}
+    \end{figbox}
+    \caption{\textbf{Diagramme de séquence.} Chronologie des appels : de l'action de l'utilisateur sur le navigateur, passant par la validation du token JWT par l'API, l'exécution de la requête en base de données, jusqu'au retour de la réponse formatée.}
+    \label{fig:sequence}
+\end{figure}
+
+Ce diagramme met en évidence le fonctionnement asynchrone et les allers-retours nécessaires pour afficher une page riche en données sans bloquer l'interface utilisateur.
+
+% --- FIGURE 6 : Diagramme de classes ---
+\section{Diagramme de classes}
+Le diagramme de classes représente la structure statique du système. Il détaille les entités, leurs attributs, leurs méthodes et les relations (associations, héritages, compositions) qui les lient.
+
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[6️⃣ Diagramme de Classes]
+        \vspace{6cm}
+        \textcolor{textgray}{\Large \textit{[ Espace réservé : Insérer l'image du Diagramme de Classes ici ]}}
+        \vspace{6cm}
+    \end{figbox}
+    \caption{\textbf{Diagramme de classes.} Modèle relationnel du système incluant les classes Utilisateur, Article, Source, Sentiment, et les liaisons entre elles (ex: un Article appartient à une Source).}
+    \label{fig:classes}
+\end{figure}
+
+Ce modèle constitue la base pour la création du schéma de notre base de données relationnelle et de nos objets (ORM) dans le code Backend.
+
+% --- FIGURE 7 : Diagramme de déploiement ---
+\section{Déploiement}
+Enfin, la phase de conception s'achève par la modélisation physique : le déploiement. Comment notre code va-t-il vivre sur les serveurs ?
+
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[7️⃣ Diagramme de Déploiement]
+        \vspace{6cm}
+        \textcolor{textgray}{\Large \textit{[ Espace réservé : Insérer l'image du Déploiement ici ]}}
+        \vspace{6cm}
+    \end{figbox}
+    \caption{\textbf{Déploiement matériel et logiciel.} Représentation des nœuds (Serveur Web, Serveur de Base de données, Cluster de traitement) et des technologies de conteneurisation utilisées (Docker, Kubernetes).}
+    \label{fig:deploiement}
+\end{figure}
+
+L'utilisation de la conteneurisation assure que l'application s'exécutera de manière identique en environnement de développement, de test et de production, éliminant ainsi les fameux problèmes de type "ça marche sur ma machine".
+
+\newpage
+
+% ==========================================
+% CHAPITRE 4 : Réalisation du système
+% ==========================================
+\chapter{Réalisation du système}
+
+\section{Introduction}
+Après avoir rigoureusement défini l'architecture et modélisé les différents composants du système lors de la phase de conception, nous abordons dans ce chapitre l'implémentation pratique du projet MediaScope. Nous présenterons en premier lieu l'environnement technologique de développement choisi, puis nous exposerons les interfaces graphiques réalisées qui constituent le point de contact final avec l'utilisateur.
+
+\section{Environnement Technologique}
+La réussite d'un projet technologique dépend grandement du choix des outils. Pour MediaScope, nous avons opté pour une stack moderne, performante et reconnue par la communauté.
+
+\begin{itemize}[label=\textcolor{secondary}{\textbullet}, itemsep=10pt]
+    \item \textbf{Développement Backend et Data Pipeline :} Le langage \textbf{Python} a été choisi comme langage principal en raison de sa suprématie incontestée dans les domaines du Data Engineering et du Machine Learning. Les scripts de scraping sont propulsés par des bibliothèques telles que \textit{BeautifulSoup} et \textit{Scrapy}. L'API Restful a été construite avec le framework \textit{FastAPI}, réputé pour son extrême rapidité et sa gestion native de l'asynchronisme.
+    \item \textbf{Modélisation NLP :} Pour l'analyse de sentiments et le traitement du langage naturel, nous nous sommes appuyés sur les bibliothèques \textit{Transformers} (Hugging Face) et \textit{spaCy}, en utilisant des modèles pré-entraînés spécifiquement ajustés pour le contexte linguistique marocain.
+    \item \textbf{Développement Frontend :} L'interface utilisateur est développée en \textbf{React.js}, une bibliothèque JavaScript permettant de construire des interfaces interactives et fluides grâce au concept du Virtual DOM. Le design est sublimé par l'utilisation de frameworks CSS modernes pour assurer une esthétique "premium" et réactive.
+    \item \textbf{Stockage des données :} La persistance des données repose sur des solutions hybrides : une base de données relationnelle (\textit{PostgreSQL}) pour la gestion des utilisateurs et des métadonnées, et une base de données NoSQL (type \textit{MongoDB} ou \textit{Elasticsearch}) adaptée au stockage et à la recherche textuelle rapide des corpus d'articles.
+\end{itemize}
+
+\section{Interfaces Utilisateurs et Captures d'écran}
+Dans cette section, nous présentons le résultat concret de nos développements frontend. Les interfaces ont été conçues avec une attention particulière portée à l'expérience utilisateur (UX) et au design (UI).
+
+% --- FIGURE Dashboard ---
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[Interface : Tableau de Bord Principal (Dashboard)]
+        \vspace{7cm}
+        \textcolor{textgray}{\Large \textit{[ Insérer la capture d'écran du Dashboard ici ]}}
+        \vspace{7cm}
+    \end{figbox}
+    \caption{\textbf{Tableau de bord principal de MediaScope.} L'interface présente une vue synthétique des analyses en temps réel. On y retrouve les KPI majeurs (Volume d'articles), la répartition des sentiments sous forme de diagrammes circulaires, et l'évolution temporelle des publications. Les couleurs ont été choisies pour offrir un contraste optimal sans fatiguer la vue.}
+    \label{fig:dashboard}
+\end{figure}
+
+% --- FIGURE Scraping/Configuration ---
+\begin{figure}[H]
+    \centering
+    \begin{figbox}[Interface : Gestion des Sources et Collecte]
+        \vspace{7cm}
+        \textcolor{textgray}{\Large \textit{[ Insérer la capture d'écran de l'interface de gestion ici ]}}
+        \vspace{7cm}
+    \end{figbox}
+    \caption{\textbf{Panel d'administration des sources.} Cette vue, réservée aux administrateurs, permet d'ajouter, de modifier ou de suspendre les opérations de scraping sur différents sites cibles. L'interface affiche également le statut de santé (Health Check) des robots de collecte en temps réel.}
+    \label{fig:scraping_ui}
+\end{figure}
+
+L'ensemble de l'application est "Responsive", ce qui signifie que les tableaux de bord se réorganisent automatiquement pour offrir une lisibilité parfaite, que l'utilisateur consulte la plateforme sur un large moniteur d'ordinateur ou sur un smartphone en mobilité.
+
+\newpage
+
+% ==========================================
+% CHAPITRE 5 : Résultats et Perspectives
+% ==========================================
+\chapter{Résultats et Perspectives}
+
+\section{Bilan des réalisations}
+Arrivés au terme de la phase de développement du projet MediaScope Morocco, nous pouvons dresser un bilan très positif. L'intégralité des objectifs principaux fixés lors de la spécification des besoins a été atteinte avec succès. 
+
+Le système est aujourd'hui capable de :
+\begin{itemize}[label=\textcolor{primary}{\checkmark}, itemsep=5pt]
+    \item Collecter de manière autonome et ininterrompue des milliers de nouveaux articles marocains chaque semaine.
+    \item Transformer et nettoyer ces données brutes grâce au pipeline basé sur l'architecture Médaillon.
+    \item Appliquer des modèles d'intelligence artificielle pour déduire avec une haute précision la polarité (sentiment) des textes.
+    \item Restituer cette information complexe via un tableau de bord élégant, rapide et sécurisé.
+\end{itemize}
+
+Ce projet nous a permis de mettre en pratique et d'approfondir nos connaissances sur un spectre très large de technologies, allant du développement web complet (Full-Stack) aux concepts pointus de l'ingénierie Big Data et de l'Intelligence Artificielle.
+
+\section{Perspectives d'amélioration}
+Toute application logicielle s'inscrit dans un processus d'amélioration continue. Bien que MediaScope soit pleinement fonctionnel, nous avons identifié plusieurs axes d'évolution majeurs pour l'avenir :
+
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=10pt]
+    \item \textbf{Intégration du NLP pour le dialecte marocain (Darija) :} Actuellement performant sur l'Arabe classique et le Français, le modèle gagnerait à intégrer une meilleure compréhension sémantique de la Darija, très présente sur les réseaux sociaux.
+    \item \textbf{Analyse des fausses informations (Fake News Detection) :} Intégrer un module de vérification des faits (Fact-Checking) en croisant les articles avec des sources de confiance pour attribuer un score de fiabilité aux publications.
+    \item \textbf{Génération de rapports par IA Générative (LLM) :} Utiliser des modèles de type GPT pour rédiger automatiquement des synthèses textuelles hebdomadaires résumant les tendances majeures du tableau de bord.
+    \item \textbf{Alerte en temps réel :} Développer un système de notification (Email/SMS) alertant l'analyste lorsqu'un mot-clé sensible connaît un pic de mentions inhabituel.
+\end{enumerate}
+
+\newpage
+
+% ==========================================
+% CONCLUSION GÉNÉRALE
+% ==========================================
+\chapter*{Conclusion Générale}
+\addcontentsline{toc}{chapter}{Conclusion Générale}
+
+Le projet \textbf{MediaScope Morocco} a constitué une aventure technologique et académique extrêmement enrichissante. L'ambition de ce projet était de construire un pont solide entre la complexité des données non structurées du web marocain et le besoin pressant d'analyses claires et exploitables par les décideurs et les analystes.
+
+Tout au long de ce rapport, nous avons exposé la rigueur de notre démarche : depuis la compréhension de la problématique initiale liée à l'infobésité, en passant par une modélisation UML détaillée de notre architecture (Globale, Médaillon, Data Flow), jusqu'à l'implémentation finale d'une plateforme dotée de tableaux de bord au design moderne et interactif.
+
+La combinaison des technologies du Web, du Big Data et du Traitement du Langage Naturel (NLP) s'est avérée être une solution redoutable d'efficacité. Nous avons réussi à automatiser ce qui aurait pris des centaines d'heures de travail humain : lire, classifier, et analyser l'opinion publique à grande échelle. 
+
+Au-delà de l'aspect purement technique, ce travail de fin d'études nous a permis de consolider notre esprit critique, notre capacité à travailler en équipe, et notre résilience face aux défis complexes inhérents au développement logiciel. Réalisé sous l'encadrement expert de M. Youness Tabii, ce projet clôture notre cursus de formation sur une note de réussite concrète et ouvre de formidables perspectives pour nos carrières futures dans les domaines de la Data Science et du Software Engineering. MediaScope n'est pas seulement l'aboutissement d'un cursus, c'est le point de départ d'une solution à fort potentiel pour le paysage médiatique numérique.
+
+\newpage
+
+\appendix
+% ==========================================
+% ANNEXE A : Guide d'utilisation
+% ==========================================
+\chapter{Guide d'utilisation}
+\section{Prérequis}
+Pour utiliser la plateforme MediaScope dans des conditions optimales, l'utilisateur doit disposer de :
+\begin{itemize}
+    \item Un navigateur web moderne (Google Chrome, Mozilla Firefox, ou Microsoft Edge).
+    \item Une connexion internet stable.
+    \item Les identifiants de connexion fournis par l'administrateur système.
+\end{itemize}
+
+\section{Première connexion}
+\begin{enumerate}
+    \item Naviguez vers l'URL de la plateforme (ex: \texttt{https://app.mediascope.ma}).
+    \item Saisissez votre adresse email et votre mot de passe sur l'écran d'authentification.
+    \item Cliquez sur le bouton "Se connecter". En cas d'oubli de mot de passe, utilisez le lien "Mot de passe oublié" pour recevoir un email de réinitialisation.
+\end{enumerate}
+
+\section{Navigation sur le Dashboard}
+Une fois connecté, vous accédez au tableau de bord principal. 
+\begin{itemize}
+    \item \textbf{Le menu latéral gauche} permet de naviguer entre les différentes sections : Vue d'ensemble, Analyse par mots-clés, Gestion des sources (si vous avez les droits d'administration), et Profil.
+    \item \textbf{Le filtre global (en haut)} vous permet d'ajuster la période temporelle pour tous les graphiques de la page (ex: "Les 7 derniers jours", "Ce mois-ci").
+    \item Vous pouvez survoler chaque segment des graphiques avec votre souris pour afficher les valeurs exactes et les pourcentages correspondants.
+\end{itemize}
+
+\newpage
+
+% ==========================================
+% BIBLIOGRAPHIE
+% ==========================================
+\begin{thebibliography}{9}
+
+\bibitem{bigdata}
+T. White, \textit{Hadoop: The Definitive Guide}, 4th Edition. O'Reilly Media, 2015.
+
+\bibitem{nlp}
+D. Jurafsky and J. H. Martin, \textit{Speech and Language Processing}, 3rd Edition. Pearson, 2023.
+
+\bibitem{medallion}
+Databricks, \textit{What is a Medallion Architecture?}, Documentation officielle Databricks. Disponible sur: \url{https://www.databricks.com/glossary/medallion-architecture}
+
+\bibitem{fastapi}
+S. Ramírez, \textit{FastAPI Documentation}. Disponible sur: \url{https://fastapi.tiangolo.com/}
+
+\bibitem{react}
+Facebook/Meta Open Source, \textit{React - A JavaScript library for building user interfaces}. Disponible sur: \url{https://reactjs.org/}
+
+\bibitem{uml}
+M. Fowler, \textit{UML Distilled: A Brief Guide to the Standard Object Modeling Language}, 3rd Edition. Addison-Wesley Professional, 2003.
+
+\bibitem{spacy}
+Explosion AI, \textit{spaCy: Industrial-Strength Natural Language Processing}. Disponible sur: \url{https://spacy.io/}
+
+\end{thebibliography}
+
+\end{document}

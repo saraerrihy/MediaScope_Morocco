@@ -1,0 +1,10 @@
+sources:
+  - name: BBC News
+    category: international
+    rss: https://feeds.bbci.co.uk/news/rss.xml
+  - name: Reuters World
+    category: international
+    rss: https://feeds.reuters.com/Reuters/worldNews
+  - name: France 24
+    category: international
+    rss: https://www.france24.com/fr/rss
